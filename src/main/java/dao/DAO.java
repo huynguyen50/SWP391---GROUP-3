@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Vector;
+
 public class DAO {
     private Connection con;
     Vector<User> users;

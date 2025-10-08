@@ -109,8 +109,6 @@ body {
 #logreg-forms .form-control:focus {
     border-color: #4a90e2;
     box-shadow: 0 0 4px rgba(74,144,226,0.4);
-}
-
     height: 75vh;
     box-sizing: border-box;
     text-align: left;
