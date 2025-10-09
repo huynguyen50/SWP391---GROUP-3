@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.SystemUser;
 
 /**
  *
@@ -21,31 +23,45 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name="LoginController", urlPatterns={"/login"})
 public class LoginController extends HttpServlet {
     DAO dao=new DAO();
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        Cookie[] cookies = request.getCookies();
+        if(cookies!=null){
+            for(Cookie cookie : cookies){
+                request.setAttribute(cookie.getName(), cookie.getValue());
+            }
+        }
+        request.getRequestDispatcher("/Views/Login.jsp").forward(request, response);
     } 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String username = request.getParameter("user");
+        String password = request.getParameter("pass");
+        String remember = request.getParameter("rememberMe");
+        SystemUser sys = dao.Ins.getAccountByUsername(username);
+        if(sys!=null && sys.getPassword().equals(password)){
+            request.getSession().setAttribute("systemUser", sys);
+            Cookie remember_userName = new Cookie("username", username);
+            Cookie remember_password = new Cookie("password", password);
+            
+            if(remember != null){
+                remember_userName.setMaxAge(24 * 60 * 60);//1 day
+                remember_password.setMaxAge(24 * 60 * 60);
+            } else {
+                remember_userName.setMaxAge(0);
+                remember_password.setMaxAge(0);
+            }
+            response.addCookie(remember_userName);
+            response.addCookie(remember_password);
+            response.sendRedirect("/Views/home.jsp");
+        }
+        else{
+            String mess="Wrong username or password!!!";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("/Views/Login.jsp").forward(request, response);
+        }
     }
     @Override
     public String getServletInfo() {
