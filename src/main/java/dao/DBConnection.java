@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public final class DBConnection {
 
-    private DBConnection() {
+    DBConnection() {
         throw new UnsupportedOperationException("Utility class");
     }
 
