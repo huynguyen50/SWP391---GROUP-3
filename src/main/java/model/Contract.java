@@ -5,23 +5,31 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author admin
  */
-public class Contract {
+public class Contract implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int contractId;
-    private int employeeId;
-    private Date startDate;
-    private Date endDate;
+    private Integer employeeId;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private BigDecimal baseSalary;
     private BigDecimal allowance;
     private String contractType;
 
-    public Contract(int contractId, int employeeId, Date startDate, Date endDate, BigDecimal baseSalary, BigDecimal allowance, String contractType) {
+    public Contract() {
+    }
+
+    public Contract(int contractId, Integer employeeId, LocalDate startDate, LocalDate endDate,
+            BigDecimal baseSalary, BigDecimal allowance, String contractType) {
         this.contractId = contractId;
         this.employeeId = employeeId;
         this.startDate = startDate;
@@ -47,19 +55,20 @@ public class Contract {
         this.employeeId = employeeId;
     }
 
-    public Date getStartDate() {
+    
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -91,5 +100,5 @@ public class Contract {
     public String toString() {
         return "Contract{" + "contractId=" + contractId + ", employeeId=" + employeeId + ", startDate=" + startDate + ", endDate=" + endDate + ", baseSalary=" + baseSalary + ", allowance=" + allowance + ", contractType=" + contractType + '}';
     }
-    
+
 }

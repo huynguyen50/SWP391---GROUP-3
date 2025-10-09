@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dao.DAO;
@@ -20,52 +19,58 @@ import model.SystemUser;
  *
  * @author DELL
  */
-@WebServlet(name="LoginController", urlPatterns={"/login"})
+@WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
-    DAO dao=new DAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
+
+        // Load cookies để hiển thị auto-fill
         Cookie[] cookies = request.getCookies();
-        if(cookies!=null){
-            for(Cookie cookie : cookies){
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
                 request.setAttribute(cookie.getName(), cookie.getValue());
             }
         }
         request.getRequestDispatcher("/Views/Login.jsp").forward(request, response);
-    } 
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
+
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
         String remember = request.getParameter("rememberMe");
-        SystemUser sys = dao.Ins.getAccountByUsername(username);
-        if(sys!=null && sys.getPassword().equals(password)){
+
+        SystemUser sys = DAO.getInstance().getAccountByUsername(username);
+
+        if (sys != null && sys.getPassword().equals(password)) {
             request.getSession().setAttribute("systemUser", sys);
-            Cookie remember_userName = new Cookie("username", username);
-            Cookie remember_password = new Cookie("password", password);
-            
-            if(remember != null){
-                remember_userName.setMaxAge(24 * 60 * 60);//1 day
-                remember_password.setMaxAge(24 * 60 * 60);
+
+            Cookie userCookie = new Cookie("username", username);
+            Cookie passCookie = new Cookie("password", password);
+
+            if (remember != null) {
+                userCookie.setMaxAge(24 * 60 * 60);
+                passCookie.setMaxAge(24 * 60 * 60);
             } else {
-                remember_userName.setMaxAge(0);
-                remember_password.setMaxAge(0);
+                userCookie.setMaxAge(0);
+                passCookie.setMaxAge(0);
             }
-            response.addCookie(remember_userName);
-            response.addCookie(remember_password);
-            response.sendRedirect("/Views/home.jsp");
-        }
-        else{
-            String mess="Wrong username or password!!!";
-            request.setAttribute("mess", mess);
+            response.addCookie(userCookie);
+            response.addCookie(passCookie);
+
+            response.sendRedirect(request.getContextPath() + "/jsp/Home.jsp");
+        } else {
+            request.setAttribute("mess", "Wrong username or password!");
             request.getRequestDispatcher("/Views/Login.jsp").forward(request, response);
         }
     }
+
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Handles user login authentication";
     }
-
 }

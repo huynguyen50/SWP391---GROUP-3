@@ -1,26 +1,29 @@
 
 package model;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author admin
  */
-public class SystemUser {
+public class SystemUser implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int userId;
     private String username;
     private String password;
-    private int roleId;
-    private Timestamp lastLogin;
+    private Integer roleId;
+    private LocalDateTime lastLogin;
     private boolean isActive;
-    private Timestamp createdDate;
+    private LocalDateTime createdDate;
     private Integer employeeId;
-    public SystemUser(){
-        
-    }
 
-    public SystemUser(int userId, String username, String password, int roleId, Timestamp lastLogin, boolean isActive, Timestamp createdDate, Integer employeeId) {
+    public SystemUser() {}
+
+    public SystemUser(int userId, String username, String password, Integer roleId,
+                      LocalDateTime lastLogin, boolean isActive, LocalDateTime createdDate, Integer employeeId) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -30,6 +33,7 @@ public class SystemUser {
         this.createdDate = createdDate;
         this.employeeId = employeeId;
     }
+
 
     public int getUserId() {
         return userId;
@@ -63,11 +67,11 @@ public class SystemUser {
         this.roleId = roleId;
     }
 
-    public Timestamp getLastLogin() {
+    public LocalDateTime getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Timestamp lastLogin) {
+    public void setLastLogin(LocalDateTime lastLogin) {
         this.lastLogin = lastLogin;
     }
 
@@ -79,11 +83,11 @@ public class SystemUser {
         this.isActive = isActive;
     }
 
-    public Timestamp getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Timestamp createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 

@@ -1,26 +1,29 @@
-
 package model;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
- *
+ * Recruitment entity – stores job postings for the HRMS system.
  * @author admin
  */
-public class Recruitment {
+public class Recruitment implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int recruitmentId;
     private String jobTitle;
     private String jobDescription;
-    private Date postDate;
-    private String status; // Open, Closed
-    private Integer postedBy;
-    private Timestamp postedDate;
-    public Recruitment(){
-        
-    }
+    private LocalDate postDate;
+    private String status;       // Open, Closed
+    private Integer postedBy;    // userId of the HR or Admin who posted
+    private LocalDateTime postedDate;
 
-    public Recruitment(int recruitmentId, String jobTitle, String jobDescription, Date postDate, String status, Integer postedBy, Timestamp postedDate) {
+    public Recruitment() {}
+
+    public Recruitment(int recruitmentId, String jobTitle, String jobDescription, 
+                       LocalDate postDate, String status, Integer postedBy, 
+                       LocalDateTime postedDate) {
         this.recruitmentId = recruitmentId;
         this.jobTitle = jobTitle;
         this.jobDescription = jobDescription;
@@ -54,11 +57,11 @@ public class Recruitment {
         this.jobDescription = jobDescription;
     }
 
-    public Date getPostDate() {
+    public LocalDate getPostDate() {
         return postDate;
     }
 
-    public void setPostDate(Date postDate) {
+    public void setPostDate(LocalDate postDate) {
         this.postDate = postDate;
     }
 
@@ -78,16 +81,24 @@ public class Recruitment {
         this.postedBy = postedBy;
     }
 
-    public Timestamp getPostedDate() {
+    public LocalDateTime getPostedDate() {
         return postedDate;
     }
 
-    public void setPostedDate(Timestamp postedDate) {
+    public void setPostedDate(LocalDateTime postedDate) {
         this.postedDate = postedDate;
     }
 
     @Override
     public String toString() {
-        return "Recruitment{" + "recruitmentId=" + recruitmentId + ", jobTitle=" + jobTitle + ", jobDescription=" + jobDescription + ", postDate=" + postDate + ", status=" + status + ", postedBy=" + postedBy + ", postedDate=" + postedDate + '}';
+        return "Recruitment{" +
+                "recruitmentId=" + recruitmentId +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", jobDescription='" + jobDescription + '\'' +
+                ", postDate=" + postDate +
+                ", status='" + status + '\'' +
+                ", postedBy=" + postedBy +
+                ", postedDate=" + postedDate +
+                '}';
     }
 }

@@ -1,29 +1,33 @@
 
 package model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author admin
  */
-public class Payroll {
+public class Payroll implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int payrollId;
-    private int employeeId;
-    private String payPeriod; // Format: YYYY-MM
+    private Integer employeeId;
+    private String payPeriod;
     private BigDecimal baseSalary;
     private BigDecimal allowance;
     private BigDecimal bonus;
     private BigDecimal deduction;
     private BigDecimal netSalary;
     private Integer approvedBy;
-    private Date approvedDate;
-    public Payroll(){
-        
-    }
+    private LocalDate approvedDate;
 
-    public Payroll(int payrollId, int employeeId, String payPeriod, BigDecimal baseSalary, BigDecimal allowance, BigDecimal bonus, BigDecimal deduction, BigDecimal netSalary, Integer approvedBy, Date approvedDate) {
+    public Payroll() {}
+
+    public Payroll(int payrollId, Integer employeeId, String payPeriod, BigDecimal baseSalary,
+                   BigDecimal allowance, BigDecimal bonus, BigDecimal deduction,
+                   BigDecimal netSalary, Integer approvedBy, LocalDate approvedDate) {
         this.payrollId = payrollId;
         this.employeeId = employeeId;
         this.payPeriod = payPeriod;
@@ -35,6 +39,7 @@ public class Payroll {
         this.approvedBy = approvedBy;
         this.approvedDate = approvedDate;
     }
+
 
     public int getPayrollId() {
         return payrollId;
@@ -108,11 +113,11 @@ public class Payroll {
         this.approvedBy = approvedBy;
     }
 
-    public Date getApprovedDate() {
+    public LocalDate getApprovedDate() {
         return approvedDate;
     }
 
-    public void setApprovedDate(Date approvedDate) {
+    public void setApprovedDate(LocalDate approvedDate) {
         this.approvedDate = approvedDate;
     }
 

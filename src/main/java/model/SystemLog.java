@@ -4,25 +4,30 @@
  */
 package model;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author admin
  */
-public class SystemLog {
+public class SystemLog implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private int logId;
-    private int userId;
+    private Integer userId;
     private String action;
     private String objectType;
     private String oldValue;
     private String newValue;
-    private Timestamp timestamp;
-    public SystemLog(){
-        
+    private LocalDateTime timestamp;
+
+    public SystemLog() {
     }
 
-    public SystemLog(int logId, int userId, String action, String objectType, String oldValue, String newValue, Timestamp timestamp) {
+    public SystemLog(int logId, Integer userId, String action, String objectType,
+            String oldValue, String newValue, LocalDateTime timestamp) {
         this.logId = logId;
         this.userId = userId;
         this.action = action;
@@ -80,11 +85,11 @@ public class SystemLog {
         this.newValue = newValue;
     }
 
-    public Timestamp getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 

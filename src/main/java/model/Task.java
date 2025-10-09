@@ -1,26 +1,30 @@
-
 package model;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  *
  * @author admin
  */
-public class Task {
-      private int taskId;
+public class Task implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private int taskId;
     private String title;
     private String description;
-    private int assignedBy;
-    private int assignTo;
-    private Date startDate;
-    private Date dueDate;
+    private Integer assignedBy;
+    private Integer assignTo;
+    private LocalDate startDate;
+    private LocalDate dueDate;
     private String status;
-    public Task(){
-        
+
+    public Task() {
     }
 
-    public Task(int taskId, String title, String description, int assignedBy, int assignTo, Date startDate, Date dueDate, String status) {
+    public Task(int taskId, String title, String description, Integer assignedBy,
+            Integer assignTo, LocalDate startDate, LocalDate dueDate, String status) {
         this.taskId = taskId;
         this.title = title;
         this.description = description;
@@ -71,19 +75,19 @@ public class Task {
         this.assignTo = assignTo;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 

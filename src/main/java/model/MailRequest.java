@@ -1,28 +1,30 @@
 
 package model;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  *
  * @author admin
  */
-public class MailRequest {
-    
-    private int requestId;
-    private int employeeId;
-    private String requestType; // Leave, Resignation, Petition
-    private Date startDate;
-    private Date endDate;
-    private String reason;
-    private String status; // Pending, Approved, Rejected
-    private Integer approvedBy;
-    
-    public MailRequest(){
-        
-    }
+public class MailRequest implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    public MailRequest(int requestId, int employeeId, String requestType, Date startDate, Date endDate, String reason, String status, Integer approvedBy) {
+    private int requestId;
+    private Integer employeeId;
+    private String requestType;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String reason;
+    private String status;
+    private Integer approvedBy;
+
+    public MailRequest() {}
+
+    public MailRequest(int requestId, Integer employeeId, String requestType,
+                       LocalDate startDate, LocalDate endDate, String reason,
+                       String status, Integer approvedBy) {
         this.requestId = requestId;
         this.employeeId = employeeId;
         this.requestType = requestType;
@@ -57,19 +59,19 @@ public class MailRequest {
         this.requestType = requestType;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

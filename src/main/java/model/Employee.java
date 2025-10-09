@@ -1,30 +1,34 @@
-
 package model;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  *
  * @author Hask
  */
-public class Employee {
-     private int employeeId;
+public class Employee implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private int employeeId;
     private String fullName;
-    private String gender; 
-    private Date dob;
+    private String gender;
+    private LocalDate dob;
     private String address;
     private String phone;
     private String email;
     private String employmentPeriod;
     private Integer departmentId;
-    private String status; 
+    private String status;
     private String position;
-    
-    public Employee(){
-        
+
+    public Employee() {
     }
 
-    public Employee(int employeeId, String fullName, String gender, Date dob, String address, String phone, String email, String employmentPeriod, Integer departmentId, String status, String position) {
+    public Employee(int employeeId, String fullName, String gender, LocalDate dob, String address,
+            String phone, String email, String employmentPeriod, Integer departmentId,
+            String status, String position) {
         this.employeeId = employeeId;
         this.fullName = fullName;
         this.gender = gender;
@@ -62,11 +66,11 @@ public class Employee {
         this.gender = gender;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
@@ -125,9 +129,10 @@ public class Employee {
     public void setPosition(String position) {
         this.position = position;
     }
-   @Override
+
+    @Override
     public String toString() {
-        return "Employee{employeeId=" + employeeId + ", fullName='" + fullName + 
-               "', email='" + email + "', status='" + status + "'}";
+        return "Employee{employeeId=" + employeeId + ", fullName='" + fullName
+                + "', email='" + email + "', status='" + status + "'}";
     }
 }

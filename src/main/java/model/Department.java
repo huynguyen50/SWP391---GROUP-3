@@ -5,16 +5,21 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author admin
  */
-public class Department {
-     private int departmentId;
+public class Department implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private int departmentId;
     private String deptName;
     private Integer deptManagerId;
-    public Department(){
-        
+
+    public Department() {
     }
 
     public Department(int departmentId, String deptName, Integer deptManagerId) {

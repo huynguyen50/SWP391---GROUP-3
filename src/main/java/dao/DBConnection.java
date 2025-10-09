@@ -14,13 +14,14 @@ public final class DBConnection {
 
     public static Connection getConnection() throws SQLException {
         Properties props = new Properties();
+
         try (InputStream input = DBConnection.class.getClassLoader().getResourceAsStream("db.properties")) {
             if (input == null) {
-                throw new SQLException("Không tìm thấy file db.properties!");
+                throw new SQLException("Không tìm thấy file cấu hình db.properties trong resources/");
             }
             props.load(input);
         } catch (Exception e) {
-            throw new SQLException("Lỗi khi tải file db.properties", e);
+            throw new SQLException("Lỗi khi đọc file db.properties", e);
         }
 
         String url = props.getProperty("db.url");
@@ -31,7 +32,7 @@ public final class DBConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {
-            throw new SQLException("Không tìm thấy MySQL Driver", e);
+            throw new SQLException("Không tìm thấy MySQL JDBC Driver", e);
         }
     }
 }

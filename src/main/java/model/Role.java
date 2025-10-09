@@ -1,17 +1,18 @@
-
 package model;
 
 /**
  *
  * @author admin
  */
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int roleId;
     private String roleName;
 
-    public Role(){
-        
-    }
+    public Role() {}
 
     public Role(int roleId, String roleName) {
         this.roleId = roleId;

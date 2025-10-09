@@ -5,26 +5,29 @@
  */
 package model;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author admin
  */
-public class Guest {
+public class Guest implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int guestId;
     private String fullName;
     private String email;
     private String phone;
     private String cv;
-    private String status; 
+    private String status;
     private Integer recruitmentId;
-    private Timestamp appliedDate;
-    public Guest(){
-        
-    }
+    private LocalDateTime appliedDate;
 
-    public Guest(int guestId, String fullName, String email, String phone, String cv, String status, Integer recruitmentId, Timestamp appliedDate) {
+    public Guest() {}
+
+    public Guest(int guestId, String fullName, String email, String phone, String cv,
+                 String status, Integer recruitmentId, LocalDateTime appliedDate) {
         this.guestId = guestId;
         this.fullName = fullName;
         this.email = email;
@@ -91,11 +94,11 @@ public class Guest {
         this.recruitmentId = recruitmentId;
     }
 
-    public Timestamp getAppliedDate() {
+    public LocalDateTime getAppliedDate() {
         return appliedDate;
     }
 
-    public void setAppliedDate(Timestamp appliedDate) {
+    public void setAppliedDate(LocalDateTime appliedDate) {
         this.appliedDate = appliedDate;
     }
 

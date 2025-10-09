@@ -1,32 +1,33 @@
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
- *
+ * Represents an employee's attendance record, including check-in/out times,
+ * working hours, and overtime information.
+ * 
  * @author admin
  */
-public class Attendance {
-    private int attendanceId;
-    private int employeeId;
-    private Date date;
-    private Time checkIn;
-    private Time checkOut;
-    private BigDecimal workingHours;
-    private BigDecimal overtimeHours;
-    
-    public Attendance(){
-        
+public class Attendance implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private int attendanceId;         // Primary key
+    private Integer employeeId;       // Foreign key to Employee
+    private LocalDate date;           // Attendance date
+    private LocalTime checkIn;        // Check-in time
+    private LocalTime checkOut;       // Check-out time
+    private BigDecimal workingHours;  // Total working hours
+    private BigDecimal overtimeHours; // Overtime hours if any
+
+    public Attendance() {
     }
 
-    public Attendance(int attendanceId, int employeeId, Date date, Time checkIn, Time checkOut, BigDecimal workingHours, BigDecimal overtimeHours) {
+    public Attendance(int attendanceId, Integer employeeId, LocalDate date, LocalTime checkIn,
+                      LocalTime checkOut, BigDecimal workingHours, BigDecimal overtimeHours) {
         this.attendanceId = attendanceId;
         this.employeeId = employeeId;
         this.date = date;
@@ -36,6 +37,7 @@ public class Attendance {
         this.overtimeHours = overtimeHours;
     }
 
+    // --- Getters & Setters ---
     public int getAttendanceId() {
         return attendanceId;
     }
@@ -44,35 +46,35 @@ public class Attendance {
         this.attendanceId = attendanceId;
     }
 
-    public int getEmployeeId() {
+    public Integer getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(Integer employeeId) {
         this.employeeId = employeeId;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Time getCheckIn() {
+    public LocalTime getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(Time checkIn) {
+    public void setCheckIn(LocalTime checkIn) {
         this.checkIn = checkIn;
     }
 
-    public Time getCheckOut() {
+    public LocalTime getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(Time checkOut) {
+    public void setCheckOut(LocalTime checkOut) {
         this.checkOut = checkOut;
     }
 
@@ -94,6 +96,14 @@ public class Attendance {
 
     @Override
     public String toString() {
-        return "Attendance{" + "attendanceId=" + attendanceId + ", employeeId=" + employeeId + ", date=" + date + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", workingHours=" + workingHours + ", overtimeHours=" + overtimeHours + '}';
+        return "Attendance{" +
+                "attendanceId=" + attendanceId +
+                ", employeeId=" + employeeId +
+                ", date=" + date +
+                ", checkIn=" + checkIn +
+                ", checkOut=" + checkOut +
+                ", workingHours=" + workingHours +
+                ", overtimeHours=" + overtimeHours +
+                '}';
     }
 }
