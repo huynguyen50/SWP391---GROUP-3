@@ -2,31 +2,36 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.io.InputStream;
+import java.util.Properties;
 
-public class DBConnection {
+public final class DBConnection {
 
-    public Connection getConnection() throws Exception {
-        String url = "jdbc:mysql://" + serverName + ":" + portNumber + "/" + dbName
-                + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(url, userID, password);
+    private DBConnection() {
+        throw new UnsupportedOperationException("Utility class");
     }
 
-    private final String serverName = "localhost";
-    private final String dbName = "hrm_db";
-    private final String portNumber = "3306";
-    private final String userID = "root";
-    private final String password = "Hahahaha2%";
-
-    // ✅ Thêm hàm main để test
-    public static void main(String[] args) {
-        try {
-            DBConnection db = new DBConnection();
-            Connection conn = db.getConnection();
-            System.out.println("Kết nối thành công!");
-            conn.close();
+    public static Connection getConnection() throws SQLException {
+        Properties props = new Properties();
+        try (InputStream input = DBConnection.class.getClassLoader().getResourceAsStream("db.properties")) {
+            if (input == null) {
+                throw new SQLException("Không tìm thấy file db.properties!");
+            }
+            props.load(input);
         } catch (Exception e) {
-            System.out.println("Lỗi kết nối: " + e.getMessage());
+            throw new SQLException("Lỗi khi tải file db.properties", e);
+        }
+
+        String url = props.getProperty("db.url");
+        String user = props.getProperty("db.user");
+        String password = props.getProperty("db.password");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            return DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("Không tìm thấy MySQL Driver", e);
         }
     }
 }
