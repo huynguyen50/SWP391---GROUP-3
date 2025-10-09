@@ -1,13 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.hrm.service;
 
-/**
- *
- * @author Hask
- */
+import com.hrm.dao.EmployeeDAO;
+import com.hrm.model.entity.Employee;
+import java.util.List;
+
 public class EmployeeService {
-    
+    private final EmployeeDAO dao = new EmployeeDAO();
+
+    public List<Employee> getAll() {
+        return dao.getAll();
+    }
+
+    public Employee getById(int id) {
+        return dao.getById(id);
+    }
+
+    public boolean save(Employee e) {
+        if (e.getEmployeeId() > 0) {
+            return dao.update(e);
+        } else {
+            return dao.insert(e);
+        }
+    }
+
+    public boolean delete(int id) {
+        return dao.delete(id);
+    }
 }

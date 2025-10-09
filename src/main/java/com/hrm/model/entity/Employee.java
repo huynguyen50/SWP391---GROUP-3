@@ -3,32 +3,28 @@ package com.hrm.model.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- *
- * @author Hask
- */
 public class Employee implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     private int employeeId;
     private String fullName;
     private String gender;
-    private LocalDate dob;
+    private LocalDate dob;       
     private String address;
     private String phone;
     private String email;
-    private String employmentPeriod;
-    private Integer departmentId;
-    private String status;
     private String position;
+    private int departmentId;
+    private String departmentName; 
+    private LocalDate hireDate;    
+    private double salary;
+    private boolean active;        // trạng thái làm việc
 
-    public Employee() {
-    }
+    public Employee() {}
 
     public Employee(int employeeId, String fullName, String gender, LocalDate dob, String address,
-            String phone, String email, String employmentPeriod, Integer departmentId,
-            String status, String position) {
+                    String phone, String email, String position, int departmentId,
+                    String departmentName, LocalDate hireDate, double salary, boolean active) {
         this.employeeId = employeeId;
         this.fullName = fullName;
         this.gender = gender;
@@ -36,10 +32,12 @@ public class Employee implements Serializable {
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.employmentPeriod = employmentPeriod;
-        this.departmentId = departmentId;
-        this.status = status;
         this.position = position;
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.hireDate = hireDate;
+        this.salary = salary;
+        this.active = active;
     }
 
     public int getEmployeeId() {
@@ -98,30 +96,6 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public String getEmploymentPeriod() {
-        return employmentPeriod;
-    }
-
-    public void setEmploymentPeriod(String employmentPeriod) {
-        this.employmentPeriod = employmentPeriod;
-    }
-
-    public Integer getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getPosition() {
         return position;
     }
@@ -130,9 +104,62 @@ public class Employee implements Serializable {
         this.position = position;
     }
 
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public LocalDate getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
-        return "Employee{employeeId=" + employeeId + ", fullName='" + fullName
-                + "', email='" + email + "', status='" + status + "'}";
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", fullName='" + fullName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", dob=" + dob +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", position='" + position + '\'' +
+                ", departmentId=" + departmentId +
+                ", departmentName='" + departmentName + '\'' +
+                ", hireDate=" + hireDate +
+                ", salary=" + salary +
+                ", active=" + active +
+                '}';
     }
 }
