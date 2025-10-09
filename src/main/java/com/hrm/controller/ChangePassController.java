@@ -5,6 +5,7 @@
 package com.hrm.controller;
 
 import com.hrm.dao.DAO;
+import com.hrm.model.entity.SystemUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,7 +14,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.SystemUser;
 
 /**
  *

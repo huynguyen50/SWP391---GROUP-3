@@ -60,7 +60,7 @@ public class LoginController extends HttpServlet {
             response.addCookie(userCookie);
             response.addCookie(passCookie);
 
-            response.sendRedirect(request.getContextPath() + "/jsp/Home.jsp");
+            response.sendRedirect(request.getContextPath() + "/Views/Home.jsp");
         } else {
             request.setAttribute("mess", "Wrong username or password!");
             request.getRequestDispatcher("/Views/Login.jsp").forward(request, response);

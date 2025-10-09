@@ -15,7 +15,7 @@
     </head>
     <body>
         <div class="finding-forms">
-            <a href="home"><button type="button" class="btn btn-primary">Back to home</button></a>
+            <a href="Home.jsp"><button type="button" class="btn btn-primary">Back to home</button></a>
             <form class="form-find" action="HRMS/changepass" method="post">
                 <h1 class="page-title">Change your password</h1>
                 <hr class="divider">

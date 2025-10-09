@@ -15,7 +15,7 @@
     </head>
     <body>
         <div class="finding-forms">
-            <a href="home"><button type="button" class="btn btn-primary">Back to home</button></a>
+            <a href="Login.jsp"><button type="button" class="btn btn-primary"> Back </button></a>
             <form class="form-find" action="Controllers/ForgotPassword" method="post">
                 <h1 class="page-title">Find your account</h1>
                 <hr class="divider">
