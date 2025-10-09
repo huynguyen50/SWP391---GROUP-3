@@ -25,8 +25,6 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // Load cookies để hiển thị auto-fill
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -53,7 +51,7 @@ public class LoginController extends HttpServlet {
             Cookie passCookie = new Cookie("password", password);
 
             if (remember != null) {
-                userCookie.setMaxAge(24 * 60 * 60);
+                userCookie.setMaxAge(24 * 60 * 60);//1 day
                 passCookie.setMaxAge(24 * 60 * 60);
             } else {
                 userCookie.setMaxAge(0);

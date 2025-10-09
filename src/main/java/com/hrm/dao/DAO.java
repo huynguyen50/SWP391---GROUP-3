@@ -26,26 +26,35 @@ public class DAO {
     }
 
     public SystemUser getAccountByUsername(String username) {
-        String sql = "SELECT * FROM Accounts WHERE username = ?";
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
+        String sql = "SELECT * FROM SystemUser WHERE username = ?";
+        SystemUser sys = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
-                return new SystemUser(
-                        rs.getInt("userId"),
-                        rs.getString("username"),
-                        rs.getString("password"),
-                        rs.getInt("roleId"),
-                        rs.getObject("lastLogin", java.time.LocalDateTime.class),
-                        rs.getBoolean("isActive"),
-                        rs.getObject("createdDate", java.time.LocalDateTime.class),
-                        rs.getInt("employeeId")
+                sys = new SystemUser(rs.getInt("userId"), rs.getString("username"), rs.getString("password"), rs.getInt("roleId"),
+                        rs.getObject("lastLogin", java.time.LocalDateTime.class), rs.getBoolean("isActive"),
+                        rs.getObject("createdDate", java.time.LocalDateTime.class), rs.getInt("employeeId")
                 );
             }
         } catch (SQLException e) {
-            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, "Lỗi truy vấn getAccountByUsername", e);
+            System.err.println("Error getting systemUser by username: " + e.getMessage());
         }
-        return null;
+        return sys;
+    }
+    
+    public int changePassword(String username, String newPass){
+        String sql = "UPDATE SystemUser SET password=? Where username=?";
+        int result=0;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, newPass);
+            ps.setString(2, username);
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error getting systemUser by username: " + e.getMessage());
+        }
+        return result;
     }
 }

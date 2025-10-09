@@ -16,12 +16,15 @@
     <body>
         <div class="finding-forms">
             <a href="home"><button type="button" class="btn btn-primary">Back to home</button></a>
-            <form class="form-find" action="Controllers/ChangePassword" method="post">
+            <form class="form-find" action="HRMS/changepass" method="post">
                 <h1 class="page-title">Change your password</h1>
                 <hr class="divider">
                 <input type="password" value="" required="" placeholder="Current password" name="curPass" class="input-email">
                 <input type="password" value="" required="" placeholder="New password" name="newPass" class="input-email">
                 <input type="password" value="" required="" placeholder="Confirm password" name="confirmPass" class="input-email">
+                <c:if test="${not empty mess}">
+                    <p style="color: red; font-size: 20px;">${mess}</p>
+                    </c:if>
                 <input type="submit" value="Save" class="submit">
             </form>
         </div>
