@@ -12,20 +12,18 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forgotPass.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>Login Form</title>
     </head>
     <body>
         <div class="finding-forms">
-            <a href="Login.jsp"><button type="button" class="btn btn-primary"> Back </button></a>
-            <form class="form-find" action="/HRMS/ForgotPassword" method="post">
-                <h1 class="page-title">Find your account</h1>
-                <hr class="divider">
-                <h3 class="page-subtitle">Please enter your email to find your account</h3>
-                <input type="email" placeholder="Email" value="" name="email" autofocus="" required="" class="input-email">
-                <c:if test="${not empty mess}">
-                    <p style="color: red; font-size: 20px;">${mess}</p>
-                </c:if>
-                <input type="submit" value="Find" class="submit">
-            </form>
+            <a href="ForgotPassword.jsp"><button type="button" class="btn btn-primary"> Back </button></a>
+        <form class="form-find" action="HRMS/recoveryController" method="post">
+            <h1 class="page-title">Verify your PIN code</h1>
+            <p class="page-subtitle">Enter the 6 digit code we sent to your email </p>
+            <input type="text" value="" name="pin" autofocus="" placeholder="Enter PIN code here" class="input-email">
+            <input type="submit" value="Confirm" class="submit">
+        </form>
         </div>
     </body>
 </html>

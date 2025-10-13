@@ -15,11 +15,16 @@ public final class DBConnection {
     public static Connection getConnection() throws SQLException {
         Properties props = new Properties();
 
+        // ✅ Thử đọc file db.properties, nếu không có thì dùng cấu hình mặc định
         try (InputStream input = DBConnection.class.getClassLoader().getResourceAsStream("db.properties")) {
-            if (input == null) {
-                throw new SQLException("Không tìm thấy file cấu hình db.properties trong resources/");
+            if (input != null) {
+                props.load(input);
+            } else {
+                System.out.println("⚠️ Không tìm thấy file db.properties, dùng cấu hình mặc định.");
+                props.setProperty("db.url", "jdbc:mysql://localhost:3306/hrm_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
+                props.setProperty("db.user", "root");
+                props.setProperty("db.password", "Hahahaha2%");
             }
-            props.load(input);
         } catch (Exception e) {
             throw new SQLException("Lỗi khi đọc file db.properties", e);
         }

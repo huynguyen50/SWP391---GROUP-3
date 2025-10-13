@@ -57,4 +57,20 @@ public class DAO {
         }
         return result;
     }
+    
+    public boolean checkEmailExist(String email) {
+    String sql = "SELECT COUNT(*) FROM Employee WHERE email = ?";
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, email);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0; // Nếu có ít nhất 1 dòng, email đã tồn tại
+        }
+    } catch (SQLException e) {
+        System.err.println("Error checking email existence: " + e.getMessage());
+    }
+    return false;
+}
+
 }
