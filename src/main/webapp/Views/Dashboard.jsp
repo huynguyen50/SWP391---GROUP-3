@@ -2,11 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>HR - H? th?ng HRM</title>
+        <title>HR - HRM System</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         <style>
@@ -190,13 +190,19 @@
 
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">
-                                    <i class="fas fa-tachometer-alt me-2"></i>
-                                    Home page
+                                <a class="nav-link" href="${pageContext.request.contextPath}/Views/Home.jsp">
+                                    <i class="fas fa-home me-2"></i>
+                                    Home
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link active" href="#">
+                                    <i class="fas fa-tachometer-alt me-2"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/Views/EmployeeList.jsp">
                                     <i class="fas fa-users me-2"></i>
                                     Staff
                                 </a>
@@ -241,19 +247,18 @@
 
                         <hr class="text-white-50">
 
-                        <div class="user-info p-3">
-                            <div class="user-avatar">
-                                ${sessionScope.username.charAt(0)}
+                        <div class="user-info p-3 d-flex align-items-center">
+                            <div class="user-avatar me-2">
+                               <i class="fas fa-user-circle fa-2x"></i>
                             </div>
                             <div>
-                                <div class="fw-bold">${sessionScope.username}</div>
-                                <small>${sessionScope.userRole}</small>
+                                <div class="fw-bold">${sessionScope.systemUser.username}</div>
                             </div>
                         </div>
 
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/Views/Profile.jsp">
                                     <i class="fas fa-user me-2"></i>
                                     Profile
                                 </a>
@@ -280,8 +285,8 @@
                     <div class="page-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h1 class="h3 mb-0">HR</h1>
-                                <p class="text-muted mb-0">Welcome back, ${sessionScope.username}!</p>
+                                <h1 class="h3 mb-0">Dashboard</h1>
+                                <p class="text-muted mb-0">Welcome back, ${sessionScope.systemUser.username}!</p>
                             </div>
                             <div class="col-auto">
                                 <span class="badge bg-success">
@@ -301,10 +306,10 @@
                                         <i class="fas fa-users"></i>
                                     </div>
                                     <h3 class="card-title mb-2">${totalEmployees}</h3>
-                                    <p class="card-text text-muted">Total staff</p>
+                                    <p class="card-text text-muted">Total Employees</p>
                                     <small class="text-success">
                                         <i class="fas fa-arrow-up me-1"></i>
-                                        ${activeEmployees} Working
+                                        ${activeEmployees} Active
                                     </small>
                                 </div>
                             </div>
@@ -317,10 +322,10 @@
                                         <i class="fas fa-tasks"></i>
                                     </div>
                                     <h3 class="card-title mb-2">${pendingTasks}</h3>
-                                    <p class="card-text text-muted">Pending jobs</p>
+                                    <p class="card-text text-muted">Pending Tasks</p>
                                     <small class="text-warning">
                                         <i class="fas fa-clock me-1"></i>
-                                        Need to update
+                                        Update required
                                     </small>
                                 </div>
                             </div>
@@ -333,10 +338,10 @@
                                         <i class="fas fa-envelope"></i>
                                     </div>
                                     <h3 class="card-title mb-2">${pendingRequests}</h3>
-                                    <p class="card-text text-muted">Application pending approval</p>
+                                    <p class="card-text text-muted">Pending Requests</p>
                                     <small class="text-info">
                                         <i class="fas fa-hourglass-half me-1"></i>
-                                        Processing
+                                        In Progress
                                     </small>
                                 </div>
                             </div>
@@ -351,7 +356,7 @@
                                     <h3 class="card-title mb-2">
                                         <fmt:formatNumber value="${thisMonthPayroll}" type="currency" currencyCode="VND"/>
                                     </h3>
-                                    <p class="card-text text-muted">This month's salary</p>
+                                    <p class="card-text text-muted">This Month's Payroll</p>
                                     <small class="text-success">
                                         <i class="fas fa-check-circle me-1"></i>
                                         Approved
@@ -365,42 +370,42 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="chart-container">
-                                <h5 class="mb-4">Quick action</h5>
+                                <h5 class="mb-4">Quick Actions</h5>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <a href="#" class="quick-action-btn">
                                             <i class="fas fa-user-plus text-primary"></i>
-                                            <span>Add staff</span>
+                                            <span>Add Employee</span>
                                         </a>
                                     </div>
                                     <div class="col-md-4">
                                         <a href="#" class="quick-action-btn">
                                             <i class="fas fa-plus-circle text-success"></i>
-                                            <span>Create jobs</span>
+                                            <span>Create Task</span>
                                         </a>
                                     </div>
                                     <div class="col-md-4">
                                         <a href="#" class="quick-action-btn">
                                             <i class="fas fa-file-alt text-warning"></i>
-                                            <span>Request leave</span>
+                                            <span>Request Leave</span>
                                         </a>
                                     </div>
                                     <div class="col-md-4">
                                         <a href="#" class="quick-action-btn">
                                             <i class="fas fa-calculator text-info"></i>
-                                            <span>Salary calculation</span>
+                                            <span>Calculate Payroll</span>
                                         </a>
                                     </div>
                                     <div class="col-md-4">
                                         <a href="#" class="quick-action-btn">
                                             <i class="fas fa-bullhorn text-danger"></i>
-                                            <span>Post a job</span>
+                                            <span>Post Recruitment</span>
                                         </a>
                                     </div>
                                     <div class="col-md-4">
                                         <a href="#" class="quick-action-btn">
                                             <i class="fas fa-chart-line text-secondary"></i>
-                                            <span>View report</span>
+                                            <span>View Reports</span>
                                         </a>
                                     </div>
                                 </div>
@@ -409,25 +414,25 @@
 
                         <div class="col-lg-4">
                             <div class="quick-actions">
-                                <h5 class="mb-4">Notification</h5>
+                                <h5 class="mb-4">Notifications</h5>
                                 <div class="list-group">
                                     <a href="#" class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-1">New job</h6>
+                                            <h6 class="mb-1">New Task Assigned</h6>
                                             <small>time</small>
                                         </div>
                                         <p class="mb-1"></p>
                                     </a>
                                     <a href="#" class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-1">Application approved</h6>
+                                            <h6 class="mb-1">Request Approved</h6>
                                             <small>time</small>
                                         </div>
                                         <p class="mb-1">Your leave request has been approved.</p>
                                     </a>
                                     <a href="#" class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-1">Lsalary</h6>
+                                            <h6 class="mb-1">Payroll Processed</h6>
                                             <small></small>
                                         </div>
                                         <p class="mb-1"></p>

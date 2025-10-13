@@ -1,6 +1,9 @@
 package com.hrm.dao;
 
+import com.hrm.model.entity.Department;
 import com.hrm.model.entity.Employee;
+import com.hrm.model.entity.Role;
+import com.hrm.model.entity.SystemUser;
 import com.hrm.util.DBUtil;
 
 import java.sql.*;
@@ -140,5 +143,68 @@ public class EmployeeDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public Employee getEmployeeBySystemUserId(int systemUserId) {
+        String sql = "SELECT e.*, e.Status, e.EmploymentPeriod, d.DeptName, su.Username, su.LastLogin, r.RoleName " +
+                     "FROM Employee e " +
+                     "LEFT JOIN Department d ON e.DepartmentID = d.DepartmentID " +
+                     "JOIN SystemUser su ON e.EmployeeID = su.EmployeeID " +
+                     "LEFT JOIN Role r ON su.RoleID = r.RoleID " +
+                     "WHERE su.UserID = ?";
+        try (Connection con = DBUtil.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, systemUserId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("EmployeeDAO: Found record for systemUserId: " + systemUserId);
+                    Employee employee = new Employee();
+                    employee.setEmployeeId(rs.getInt("EmployeeID"));
+                    employee.setFullName(rs.getString("FullName"));
+                    employee.setGender(rs.getString("Gender"));
+                    employee.setDob(rs.getDate("DOB") != null ? rs.getDate("DOB").toLocalDate() : null);
+                    employee.setAddress(rs.getString("Address"));
+                    employee.setPhone(rs.getString("Phone"));
+                    employee.setEmail(rs.getString("Email"));
+                    employee.setPosition(rs.getString("Position"));
+                    employee.setHireDate(rs.getDate("HireDate") != null ? rs.getDate("HireDate").toLocalDate() : null);
+                    employee.setSalary(rs.getDouble("Salary"));
+                    employee.setActive(rs.getBoolean("Active"));
+                    
+                    // Assuming 'Status' and 'EmploymentPeriod' are columns in the Employee table
+                    employee.setStatus(rs.getString("Status"));
+                    employee.setEmploymentPeriod(rs.getString("EmploymentPeriod"));
+
+                    // Populate Department
+                    if (rs.getInt("DepartmentID") != 0) {
+                        Department department = new Department();
+                        department.setDepartmentId(rs.getInt("DepartmentID")); // Sửa lỗi gán sai ID
+                        department.setDeptName(rs.getString("DeptName"));
+                        employee.setDepartment(department);
+                    }
+
+                    // Populate SystemUser and Role
+                    SystemUser systemUser = new SystemUser();
+                    systemUser.setUsername(rs.getString("Username"));
+                    Timestamp lastLoginTimestamp = rs.getTimestamp("LastLogin");
+                    if (lastLoginTimestamp != null) {
+                        systemUser.setLastLogin(lastLoginTimestamp.toLocalDateTime());
+                    }
+                    
+                    Role role = new Role();
+                    role.setRoleName(rs.getString("RoleName"));
+                    systemUser.setRole(role);
+                    
+                    employee.setSystemUser(systemUser);
+
+                    return employee;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("EmployeeDAO: SQL Exception for systemUserId: " + systemUserId);
+            e.printStackTrace();
+        }
+        System.out.println("EmployeeDAO: No employee found for systemUserId: " + systemUserId);
+        return null;
     }
 }
