@@ -19,8 +19,6 @@ public class SystemUser implements Serializable {
     private boolean isActive;
     private LocalDateTime createdDate;
     private Integer employeeId;
-    
-    private Role role;
 
     public SystemUser() {}
 
@@ -104,13 +102,5 @@ public class SystemUser implements Serializable {
     @Override
     public String toString() {
         return "SystemUser{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", roleId=" + roleId + ", lastLogin=" + lastLogin + ", isActive=" + isActive + ", createdDate=" + createdDate + ", employeeId=" + employeeId + '}';
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }
