@@ -19,12 +19,13 @@ public class Employee implements Serializable {
     private LocalDate hireDate;    
     private double salary;
     private boolean active;        // trạng thái làm việc
-
+    private Department department;
+    private String employmentPeriod;
+    private String status;
+    private SystemUser systemUser;
     public Employee() {}
 
-    public Employee(int employeeId, String fullName, String gender, LocalDate dob, String address,
-                    String phone, String email, String position, int departmentId,
-                    String departmentName, LocalDate hireDate, double salary, boolean active) {
+    public Employee(int employeeId, String fullName, String gender, LocalDate dob, String address, String phone, String email, String position, int departmentId, String departmentName, LocalDate hireDate, double salary, boolean active, Department department, String employmentPeriod, String status, SystemUser systemUser) {
         this.employeeId = employeeId;
         this.fullName = fullName;
         this.gender = gender;
@@ -38,6 +39,10 @@ public class Employee implements Serializable {
         this.hireDate = hireDate;
         this.salary = salary;
         this.active = active;
+        this.department = department;
+        this.employmentPeriod = employmentPeriod;
+        this.status = status;
+        this.systemUser = systemUser;
     }
 
     public int getEmployeeId() {
@@ -144,22 +149,41 @@ public class Employee implements Serializable {
         this.active = active;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public String getEmploymentPeriod() {
+        return employmentPeriod;
+    }
+
+    public void setEmploymentPeriod(String employmentPeriod) {
+        this.employmentPeriod = employmentPeriod;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public SystemUser getSystemUser() {
+        return systemUser;
+    }
+
+    public void setSystemUser(SystemUser systemUser) {
+        this.systemUser = systemUser;
+    }
+
     @Override
     public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", fullName='" + fullName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", dob=" + dob +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", position='" + position + '\'' +
-                ", departmentId=" + departmentId +
-                ", departmentName='" + departmentName + '\'' +
-                ", hireDate=" + hireDate +
-                ", salary=" + salary +
-                ", active=" + active +
-                '}';
+        return "Employee{" + "employeeId=" + employeeId + ", fullName=" + fullName + ", gender=" + gender + ", dob=" + dob + ", address=" + address + ", phone=" + phone + ", email=" + email + ", position=" + position + ", departmentId=" + departmentId + ", departmentName=" + departmentName + ", hireDate=" + hireDate + ", salary=" + salary + ", active=" + active + ", department=" + department + ", employmentPeriod=" + employmentPeriod + ", status=" + status + ", systemUser=" + systemUser + '}';
     }
+
 }
