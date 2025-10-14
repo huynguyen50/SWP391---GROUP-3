@@ -38,12 +38,12 @@
                     </c:if>
                     <input type="submit" value="Login" class="submit">
                     <a href="ForgotPassword.jsp">Forgot password?</a>
-                    <!--                    <hr class="divider">
-                                        <p class="login-or">Or</p>
-                                        <button class="btn btn-danger d-flex align-items-center justify-content-center" style="gap:6px; font-weight:500;">
-                                            <span>Login with Gmail</span>
-                                            <i class="material-icons" style="font-size:20px;">mail</i>
-                                        </button>-->
+                    <hr class="divider">
+                    <p class="login-or">Or</p>
+                    <button class="btn btn-danger d-flex align-items-center justify-content-center" style="gap:6px; font-weight:500;">
+                        <span>Login with Gmail</span>
+                        <i class="material-icons" style="font-size:20px;">mail</i>
+                    </button>
                 </form>
             </div>
         </div>

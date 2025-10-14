@@ -18,12 +18,15 @@
     <body>
         <div class="finding-forms">
             <a href="ForgotPassword.jsp"><button type="button" class="btn btn-primary"> Back </button></a>
-        <form class="form-find" action="HRMS/recoveryController" method="post">
-            <h1 class="page-title">Verify your PIN code</h1>
-            <p class="page-subtitle">Enter the 6 digit code we sent to your email </p>
-            <input type="text" value="" name="pin" autofocus="" placeholder="Enter PIN code here" class="input-email">
-            <input type="submit" value="Confirm" class="submit">
-        </form>
+            <form class="form-find" action="/HRMS/Recovery" method="post">
+                <h1 class="page-title">Verify your PIN code</h1>
+                <p class="page-subtitle">Enter the 6 digit code we sent to your email </p>
+                <input type="text" value="" name="pin" autofocus="" placeholder="Enter PIN code here" class="input-email">
+                <c:if test="${not empty mess}">
+                    <p style="color: red; font-size: 20px;">${mess}</p>
+                </c:if>
+                <input type="submit" value="Confirm" class="submit">
+            </form>
         </div>
     </body>
 </html>
