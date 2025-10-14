@@ -166,11 +166,13 @@
                     </a>
                 </div>
                  <div class="col-md-4 mb-4">
-                    <a href="#" class="quick-action-btn">
-                        <i class="fas fa-file-alt text-secondary"></i>
-                        <span>Requests & Forms</span>
-                    </a>
-                </div>
+    <a href="${pageContext.request.contextPath}/Views/leave_create.jsp" class="quick-action-btn">
+    <i class="fas fa-file-alt text-secondary"></i>
+    <span>Requests & Forms</span>
+</a>
+
+</div>
+
             </div>
 
             <!-- Agenda preview -->

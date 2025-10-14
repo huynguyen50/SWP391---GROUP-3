@@ -28,7 +28,8 @@ public class LeaveCreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/views/request/leave_create.jsp").forward(request, response);
+        request.getRequestDispatcher("/Views/leave_create.jsp").forward(request, response);
+
     }
 
     @Override
