@@ -19,7 +19,7 @@
         <div class="container">
             <!--left-->
             <div class="recruitmentContent">
-                <a href="home"><button type="button" class="btn btn-primary">Back to home</button></a>
+                <a href="Home.jsp"><button type="button" class="btn btn-primary">Back to home</button></a>
                 <h1>Welcome to our company</h1>
                 <div class="info-box">Recruitment information</div>
                 <a href="#">Recruit now</a>
@@ -29,9 +29,12 @@
                 <form class="form-signin" action="/HRMS/login" method="post">
                     <input type="text" name="user" value="${username}" class="form-control" required="" autofocus="" placeholder="Username">
                     <input type="password" name="pass" value="${password}" class="form-control" required="" autofocus="" placeholder="Password">
-                    <div class="remember-group"><input type="checkbox" name="rememberMe" value="true">Remember me</div>
+                    <div class="remember-group">
+                        <input type="checkbox" name="rememberMe" value="1" id="exampleCheck" ${username != null ? "checked" : ""}>
+                        <label for="exampleCheck">Remember me</label>
+                    </div>                
                     <c:if test="${not empty mess}">
-                    <p style="color: red; font-size: 20px;">${mess}</p>
+                        <p style="color: red; font-size: 20px;">${mess}</p>
                     </c:if>
                     <input type="submit" value="Login" class="submit">
                     <a href="ForgotPassword.jsp">Forgot password?</a>

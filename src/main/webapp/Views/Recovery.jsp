@@ -12,20 +12,20 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forgotPass.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>Login Form</title>
     </head>
     <body>
         <div class="finding-forms">
-            <a href="Home.jsp"><button type="button" class="btn btn-primary">Back to home</button></a>
-            <form class="form-find" action="HRMS/changepass" method="post">
-                <h1 class="page-title">Change your password</h1>
-                <hr class="divider">
-                <input type="password" value="" required="" placeholder="Current password" name="curPass" class="input-email">
-                <input type="password" value="" required="" placeholder="New password" name="newPass" class="input-email">
-                <input type="password" value="" required="" placeholder="Confirm password" name="confirmPass" class="input-email">
+            <a href="ForgotPassword.jsp"><button type="button" class="btn btn-primary"> Back </button></a>
+            <form class="form-find" action="/HRMS/Recovery" method="post">
+                <h1 class="page-title">Verify your PIN code</h1>
+                <p class="page-subtitle">Enter the 6 digit code we sent to your email </p>
+                <input type="text" value="" name="pin" autofocus="" placeholder="Enter PIN code here" class="input-email">
                 <c:if test="${not empty mess}">
                     <p style="color: red; font-size: 20px;">${mess}</p>
-                    </c:if>
-                <input type="submit" value="Save" class="submit">
+                </c:if>
+                <input type="submit" value="Confirm" class="submit">
             </form>
         </div>
     </body>

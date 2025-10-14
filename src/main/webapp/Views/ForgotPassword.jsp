@@ -15,12 +15,15 @@
     </head>
     <body>
         <div class="finding-forms">
-            <a href="home"><button type="button" class="btn btn-primary">Back to home</button></a>
-            <form class="form-find" action="Controllers/ForgotPassword" method="post">
+            <a href="Login.jsp"><button type="button" class="btn btn-primary"> Back </button></a>
+            <form class="form-find" action="/HRMS/ForgotPassword" method="post">
                 <h1 class="page-title">Find your account</h1>
                 <hr class="divider">
                 <h3 class="page-subtitle">Please enter your email to find your account</h3>
-                <input type="text" placeholder="Email" value="" name="email" autofocus="" required="" class="input-email">
+                <input type="email" placeholder="Email" value="" name="email" autofocus="" required="" class="input-email">
+                <c:if test="${not empty mess}">
+                    <p style="color: red; font-size: 20px;">${mess}</p>
+                </c:if>
                 <input type="submit" value="Find" class="submit">
             </form>
         </div>
