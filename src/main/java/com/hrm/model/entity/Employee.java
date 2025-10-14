@@ -19,6 +19,8 @@ public class Employee implements Serializable {
     private LocalDate hireDate;    
     private double salary;
     private boolean active;        // trạng thái làm việc
+    private String employmentPeriod;
+    private String status;
 
     public Employee() {}
 
@@ -38,6 +40,23 @@ public class Employee implements Serializable {
         this.hireDate = hireDate;
         this.salary = salary;
         this.active = active;
+    }
+
+    public Employee(int employeeId, String fullName, String gender, LocalDate dob, String address,
+                    String phone, String email, String position, int departmentId,
+                    String departmentName, String employmentPeriod, String status) {
+        this.employeeId = employeeId;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.dob = dob;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.position = position;
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.employmentPeriod = employmentPeriod;
+        this.status = status;
     }
 
     public int getEmployeeId() {
@@ -144,6 +163,22 @@ public class Employee implements Serializable {
         this.active = active;
     }
 
+    public String getEmploymentPeriod() {
+        return employmentPeriod;
+    }
+
+    public void setEmploymentPeriod(String employmentPeriod) {
+        this.employmentPeriod = employmentPeriod;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -157,9 +192,8 @@ public class Employee implements Serializable {
                 ", position='" + position + '\'' +
                 ", departmentId=" + departmentId +
                 ", departmentName='" + departmentName + '\'' +
-                ", hireDate=" + hireDate +
-                ", salary=" + salary +
-                ", active=" + active +
+                ", employmentPeriod='" + employmentPeriod + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

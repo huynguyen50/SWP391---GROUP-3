@@ -33,9 +33,8 @@ public class EmployeeDAO {
                 e.setDepartmentId(rs.getInt("DepartmentID"));
                 e.setDepartmentName(rs.getString("DeptName"));
                 e.setPosition(rs.getString("Position"));
-                e.setHireDate(rs.getDate("HireDate") != null ? rs.getDate("HireDate").toLocalDate() : null);
-                e.setSalary(rs.getDouble("Salary"));
-                e.setActive(rs.getBoolean("Active"));
+                e.setEmploymentPeriod(rs.getString("EmploymentPeriod"));
+                e.setStatus(rs.getString("Status"));
                 list.add(e);
             }
         } catch (SQLException e) {
@@ -62,9 +61,8 @@ public class EmployeeDAO {
                 e.setEmail(rs.getString("Email"));
                 e.setDepartmentId(rs.getInt("DepartmentID"));
                 e.setPosition(rs.getString("Position"));
-                e.setHireDate(rs.getDate("HireDate") != null ? rs.getDate("HireDate").toLocalDate() : null);
-                e.setSalary(rs.getDouble("Salary"));
-                e.setActive(rs.getBoolean("Active"));
+                e.setEmploymentPeriod(rs.getString("EmploymentPeriod"));
+                e.setStatus(rs.getString("Status"));
                 return e;
             }
         } catch (SQLException e) {
@@ -76,8 +74,8 @@ public class EmployeeDAO {
     public boolean insert(Employee e) {
         String sql = """
             INSERT INTO Employee (FullName, Gender, DOB, Address, Phone, Email, 
-                                  DepartmentID, Position, HireDate, Salary, Active)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                  DepartmentID, Position, EmploymentPeriod, Status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """;
         try (Connection con = DBUtil.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -90,9 +88,8 @@ public class EmployeeDAO {
             ps.setString(6, e.getEmail());
             ps.setObject(7, e.getDepartmentId(), Types.INTEGER);
             ps.setString(8, e.getPosition());
-            ps.setDate(9, e.getHireDate() != null ? Date.valueOf(e.getHireDate()) : null);
-            ps.setDouble(10, e.getSalary());
-            ps.setBoolean(11, e.isActive());
+            ps.setString(9, e.getEmploymentPeriod());
+            ps.setString(10, e.getStatus());
 
             return ps.executeUpdate() > 0;
         } catch (SQLException ex) {
@@ -104,7 +101,7 @@ public class EmployeeDAO {
     public boolean update(Employee e) {
         String sql = """
             UPDATE Employee SET FullName=?, Gender=?, DOB=?, Address=?, Phone=?, Email=?, 
-                                DepartmentID=?, Position=?, HireDate=?, Salary=?, Active=? 
+                                DepartmentID=?, Position=?, EmploymentPeriod=?, Status=? 
             WHERE EmployeeID=?
         """;
         try (Connection con = DBUtil.getConnection();
@@ -118,10 +115,9 @@ public class EmployeeDAO {
             ps.setString(6, e.getEmail());
             ps.setObject(7, e.getDepartmentId(), Types.INTEGER);
             ps.setString(8, e.getPosition());
-            ps.setDate(9, e.getHireDate() != null ? Date.valueOf(e.getHireDate()) : null);
-            ps.setDouble(10, e.getSalary());
-            ps.setBoolean(11, e.isActive());
-            ps.setInt(12, e.getEmployeeId());
+            ps.setString(9, e.getEmploymentPeriod());
+            ps.setString(10, e.getStatus());
+            ps.setInt(11, e.getEmployeeId());
 
             return ps.executeUpdate() > 0;
         } catch (SQLException ex) {

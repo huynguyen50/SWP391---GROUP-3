@@ -52,9 +52,8 @@ public class EmployeeServlet extends HttpServlet {
         e.setEmail(req.getParameter("email"));
         e.setDepartmentId(Integer.parseInt(req.getParameter("departmentId")));
         e.setPosition(req.getParameter("position"));
-        e.setHireDate(LocalDate.parse(req.getParameter("hireDate")));
-        e.setSalary(Double.parseDouble(req.getParameter("salary")));
-        e.setActive("true".equalsIgnoreCase(req.getParameter("active")));
+        e.setEmploymentPeriod(req.getParameter("employmentPeriod"));
+        e.setStatus(req.getParameter("status"));
 
         service.save(e);
         resp.sendRedirect(req.getContextPath() + "/admin/employees");
