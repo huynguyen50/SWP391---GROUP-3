@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet(name="RecoveryController", urlPatterns={"/RecoveryController"})
+@WebServlet(name="RecoveryController", urlPatterns={"/Recovery"})
 public class RecoveryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,10 +29,10 @@ public class RecoveryController extends HttpServlet {
         String sessionPin = (String) ses.getAttribute("pinCode");
         
         if(sessionPin != null && inputPin.equals(sessionPin)){
-            response.sendRedirect("Views/ChangePassword.jsp");
+            response.sendRedirect("/Views/ChangePassword.jsp");
         }else{
             request.setAttribute("mess", "Invalid PIN code!");
-            request.getRequestDispatcher("Views/Recovery.jsp").forward(request, response);
+            request.getRequestDispatcher("/Views/Recovery.jsp").forward(request, response);
         }
     }
     @Override
