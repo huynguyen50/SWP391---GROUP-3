@@ -1,3 +1,4 @@
+<%@ page import="java.util.List, java.util.Map" %>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
@@ -5,7 +6,10 @@
     <head>
         <title>Employees - HRMS</title>
         <link rel="stylesheet" href="Admin/Admin_home.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     </head>
+
     <body>
         <div class="dashboard-container">
             <!-- Sidebar -->
@@ -18,10 +22,18 @@
                 </div>
 
                 <div class="sidebar-nav">
-                    <a href="${pageContext.request.contextPath}/admin?action=dashboard" class="nav-item active">🏠 Dashboard</a>
-                    <a href="${pageContext.request.contextPath}/admin?action=employees" class="nav-item">👥 Employees</a>
-                    <a href="${pageContext.request.contextPath}/admin?action=departments" class="nav-item">🏢 Departments</a>
-                    <a href="${pageContext.request.contextPath}/admin?action=profile" class="nav-item">👤 Profile</a>
+                    <a href="${pageContext.request.contextPath}/admin?action=dashboard"
+                       class="nav-item ${activePage == 'dashboard' ? 'active' : ''}">🏠 Dashboard</a>
+
+                    <a href="${pageContext.request.contextPath}/admin?action=employees"
+                       class="nav-item ${activePage == 'employees' ? 'active' : ''}">👥 Employees</a>
+
+                    <a href="${pageContext.request.contextPath}/admin?action=departments"
+                       class="nav-item ${activePage == 'departments' ? 'active' : ''}">🏢 Departments</a>
+
+                    <a href="${pageContext.request.contextPath}/admin?action=profile"
+                       class="nav-item ${activePage == 'profile' ? 'active' : ''}">👤 Profile</a>
+
                 </div>
 
 
@@ -57,23 +69,39 @@
                     <h1 class="page-title">Employee Management</h1>
                     <div class="table-section">
                         <table class="employee-table">
-                            <thead>
+                            <table>
                                 <tr>
-                                    <th>ID</th><th>Name</th><th>Department</th><th>Role</th><th>Actions</th>
+                                    <th>ID</th>
+                                    <th>Họ tên</th>
+                                    <th>Giới tính</th>
+                                    <th>Email</th>
+                                    <th>Chức vụ</th>
+                                    <th>Trạng thái</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+
+                                <%
+                                    List<Map<String, Object>> list = (List<Map<String, Object>>) request.getAttribute("employeeList");
+                                    if (list != null && !list.isEmpty()) {
+                                        for (Map<String, Object> emp : list) {
+                                %>
                                 <tr>
-                                    <td>EMP001</td>
-                                    <td>Nguyễn Văn A</td>
-                                    <td>IT</td>
-                                    <td>Developer</td>
+                                    <td><%= emp.get("EmployeeID") %></td>
+                                    <td><%= emp.get("FullName") %></td>
+                                    <td><%= emp.get("Gender") %></td>
+                                    <td><%= emp.get("Email") %></td>
+                                    <td><%= emp.get("Position") %></td>
                                     <td>
-                                        <button class="btn-edit">Edit</button>
-                                        <button class="btn-delete">Delete</button>
+                                        <span class="status-badge <%= emp.get("Status").toString().toLowerCase() %>">
+                                            <%= emp.get("Status") %>
+                                        </span>
                                     </td>
+
                                 </tr>
-                            </tbody>
+                                <%      }
+            } else { %>
+                                <tr><td colspan="6">Không có dữ liệu nhân viên</td></tr>
+                                <% } %>
+                            </table>
                         </table>
                     </div>
                 </div>
@@ -82,13 +110,5 @@
     </body>
     <script src="dashboard.js"></script>
 </body>
-<script>
-    const currentPage = window.location.pathname.split("/").pop();
-    document.querySelectorAll('.nav-item').forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
-            link.classList.add('active');
-        }
-    });
-</script>
 
 </html>

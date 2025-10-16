@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Admin Dashboard</title>
-        <link rel="stylesheet" href="css/Admin_home.css">
+        <link rel="stylesheet" href="Admin/Admin_home.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
@@ -19,12 +19,19 @@
                 </div>
 
                 <div class="sidebar-nav">
-                    <a href="${pageContext.request.contextPath}/admin?action=dashboard" class="nav-item active">🏠 Dashboard</a>
-                    <a href="${pageContext.request.contextPath}/admin?action=employees" class="nav-item">👥 Employees</a>
-                    <a href="${pageContext.request.contextPath}/admin?action=departments" class="nav-item">🏢 Departments</a>
-                    <a href="${pageContext.request.contextPath}/admin?action=profile" class="nav-item">👤 Profile</a>
-                </div>
+                    <a href="${pageContext.request.contextPath}/admin?action=dashboard"
+                       class="nav-item ${activePage == 'dashboard' ? 'active' : ''}">🏠 Dashboard</a>
 
+                    <a href="${pageContext.request.contextPath}/admin?action=employees"
+                       class="nav-item ${activePage == 'employees' ? 'active' : ''}">👥 Employees</a>
+
+                    <a href="${pageContext.request.contextPath}/admin?action=departments"
+                       class="nav-item ${activePage == 'departments' ? 'active' : ''}">🏢 Departments</a>
+
+                    <a href="${pageContext.request.contextPath}/admin?action=profile"
+                       class="nav-item ${activePage == 'profile' ? 'active' : ''}">👤 Profile</a>
+
+                </div>
 
             </aside>
 
